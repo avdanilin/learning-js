@@ -15,14 +15,30 @@ function forEach(array, fn) {
  Напишите аналог встроенного метода map для работы с массивами
  */
 function map(array, fn) {
- }
+
+    let newArray = []
+
+    for (let i = 0; i < array.length; i++) {
+        newArray[i] = fn(array[i], i, array);
+    }
+
+    return newArray;
+}
 
 /*
  Задача 3:
  Напишите аналог встроенного метода reduce для работы с массивами
  */
 function reduce(array, fn, initial) {
- }
+    let a = initial || array[0],
+        i = initial ? 0 : 1;
+
+    for (; i < array.length; i++) {
+        a = fn(a, array[i], i, array)
+    }
+
+    return a;
+}
 
 /*
  Задача 4:
@@ -30,7 +46,8 @@ function reduce(array, fn, initial) {
  Функция должна удалить указанное свойство из указанного объекта
  */
 function deleteProperty(obj, prop) {
- }
+    return delete obj[prop];
+}
 
 /*
  Задача 5:
@@ -38,28 +55,30 @@ function deleteProperty(obj, prop) {
  Функция должна проверить существует ли укзаанное свойство в указанном объекте
  */
 function hasProperty(obj, prop) {
- }
+
+    return obj.hasOwnProperty(prop);
+}
 
 /*
  Задача 6:
  Функция должна получить все перечисляемые свойства объекта и вернуть их в виде массива
  */
 function getEnumProps(obj) {
- }
+}
 
 /*
  Задача 7:
  Функция должна перебрать все свойства объекта, преобразовать их имена в верхний регистра и вернуть в виде массива
  */
 function upperProps(obj) {
- }
+}
 
 /*
  Задача 8 *:
  Напишите аналог встроенного метода slice для работы с массивами
  */
 function slice(array, from, to) {
- }
+}
 
 /*
  Задача 9 *:
@@ -67,7 +86,7 @@ function slice(array, from, to) {
  Proxy должен перехватывать все попытки записи значений свойств и возводить это значение в квадрат
  */
 function createProxy(obj) {
- }
+}
 
 export {
     forEach,

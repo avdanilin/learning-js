@@ -30,6 +30,7 @@ function map(array, fn) {
  Напишите аналог встроенного метода reduce для работы с массивами
  */
 function reduce(array, fn, initial) {
+
     let a = initial || array[0],
         i = initial ? 0 : 1;
 
@@ -55,7 +56,6 @@ function deleteProperty(obj, prop) {
  Функция должна проверить существует ли укзаанное свойство в указанном объекте
  */
 function hasProperty(obj, prop) {
-
     return obj.hasOwnProperty(prop);
 }
 
@@ -64,6 +64,7 @@ function hasProperty(obj, prop) {
  Функция должна получить все перечисляемые свойства объекта и вернуть их в виде массива
  */
 function getEnumProps(obj) {
+    return Object.keys(obj);
 }
 
 /*
@@ -71,6 +72,15 @@ function getEnumProps(obj) {
  Функция должна перебрать все свойства объекта, преобразовать их имена в верхний регистра и вернуть в виде массива
  */
 function upperProps(obj) {
+
+    let arrPropUppercase = [];
+
+    for (let objKey in obj) {
+        objKey = objKey.toUpperCase();
+        arrPropUppercase.push(objKey);
+    }
+    return arrPropUppercase;
+
 }
 
 /*

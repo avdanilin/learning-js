@@ -88,6 +88,28 @@ function upperProps(obj) {
  Напишите аналог встроенного метода slice для работы с массивами
  */
 function slice(array, from, to) {
+
+    let sliceArray = [],
+        end = to > array.length ? array.length : to;
+
+    if (from < 0 && (array.length + from >= 0)) {
+        from += array.length;
+    } else if (isNaN(from) || (array.length + from < 0)) {
+        from = 0;
+    }
+
+    if (end < 0 && (array.length + end >= 0)) {
+        end += array.length;
+    } else if (isNaN(end)) {
+        end = array.length;
+    }
+
+    for (let i = from; i < end; i++) {
+        sliceArray[sliceArray.length] = array[i];
+    }
+
+    return sliceArray;
+
 }
 
 /*
@@ -97,6 +119,7 @@ function slice(array, from, to) {
  */
 function createProxy(obj) {
 }
+
 
 export {
     forEach,

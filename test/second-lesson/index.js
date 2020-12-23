@@ -1,6 +1,6 @@
-import { assert } from 'chai';
-import { randomNumberArray, randomStringArray, randomValue as random } from '../../helper';
-import { calculator, isAllTrue, isSomeTrue, returnBadArguments } from '../../src/second-lesson/index';
+import {assert} from 'chai';
+import {randomNumberArray, randomStringArray, randomValue as random} from '../../helper';
+import {calculator, isAllTrue, isSomeTrue, returnBadArguments} from '../../src/second-lesson/index';
 
 describe('ДЗ 2 - работа с исключениями и отладчиком', () => {
     describe('isAllTrue', () => {
@@ -35,7 +35,7 @@ describe('ДЗ 2 - работа с исключениями и отладчик�
         });
 
         it('должна выбросить исключение, если передан не массив', () => {
-            assert.throws(isAllTrue.bind(null,':(', () => {
+            assert.throws(isAllTrue.bind(null, ':(', () => {
             }), 'empty array');
             assert.throws(isAllTrue.bind(null, {}), 'empty array');
         });

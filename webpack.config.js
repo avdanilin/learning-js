@@ -5,7 +5,7 @@ const rules = require('./webpack.config.rules');
 const fs = require('fs');
 const path = require('path');
 
-const root = path.resolve('src/first-lesson');
+const root = path.resolve('src/third-lesson');
 const files = fs.readdirSync(root)
     .reduce((all, current) => {
         const ext = path.extname(current);

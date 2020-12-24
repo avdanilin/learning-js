@@ -109,7 +109,6 @@ function slice(array, from, to) {
     }
 
     return sliceArray;
-
 }
 
 /*
@@ -117,7 +116,13 @@ function slice(array, from, to) {
  Функция принимает объект и должна вернуть Proxy для этого объекта
  Proxy должен перехватывать все попытки записи значений свойств и возводить это значение в квадрат
  */
+
 function createProxy(obj) {
+    return new Proxy(obj, {
+        get: function (item, property) {
+            return Math.pow(item[property], 2);
+        }
+    });
 }
 
 

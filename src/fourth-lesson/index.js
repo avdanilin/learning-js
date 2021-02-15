@@ -9,6 +9,7 @@
 function createDivWithText(text) {
 
     let div = document.createElement('div');
+
     div.innerText = text;
 
     return div;
@@ -22,7 +23,7 @@ function createDivWithText(text) {
  */
 function createAWithHref(hrefValue) {
 
-    let a = document.createElement("a");
+    let a = document.createElement('a');
 
     a.setAttribute('href', hrefValue);
 
@@ -98,19 +99,38 @@ function findError(where) {
  * должно быть преобразовано в <div></div><p></p>
  */
 function deleteTextNodes(where) {
+    let nodeElement = where.childNodes;
+
+    for (let i = 0; i < nodeElement.length; i++) {
+        if (nodeElement[i].nodeType === 3) {
+            nodeElement[i].parentNode.removeChild(nodeElement[i]);
+        }
+    }
 }
 
 /**
  * Выполнить предудыщее задание с использование рекурсии
  * то есть необходимо заходить внутрь каждого дочернего элемента
  *
- * @param {Element} where - где искать
+ * @param {ChildNode} where - где искать
  *
  * @example
  * после выполнения функции, дерево <span> <div> <b>привет</b> </div> <p>loftchool</p> !!!</span>
  * должно быть преобразовано в <span><div><b></b></div><p></p></span>
  */
 function deleteTextNodesRecursive(where) {
+    let childNodes = where.childNodes;
+
+    for (let i = 0; i < childNodes.length; i++) {
+        let childNode = childNodes[i];
+
+        if (childNode.nodeType === 3) {
+            childNode.parentNode.removeChild(childNode);
+            i--;
+        } else if (childNode.nodeType === 1) {
+            deleteTextNodesRecursive(childNode);
+        }
+    }
 }
 
 /**
@@ -136,6 +156,42 @@ function deleteTextNodesRecursive(where) {
  * }
  */
 function collectDOMStat(root) {
+
+    let statistic = {
+        tags: {},
+        classes: {},
+        texts: 0
+    };
+
+    function scan(root) {
+        for (let childNode of root.childNodes) {
+            if (childNode.nodeType === Node.ELEMENT_NODE) {
+
+                if (childNode.tagName in statistic.tags) {
+                    statistic.tags[childNode.tagName]++;
+                } else {
+                    statistic.tags[childNode.tagName] = 1;
+                }
+
+                for (let className of childNode.classList) {
+                    if (className in statistic.classes) {
+                        statistic.classes[className]++;
+                    } else {
+                        statistic.classes[className] = 1;
+                    }
+                }
+
+                scan(childNode);
+
+            } else if (childNode.nodeType === Node.TEXT_NODE) {
+                statistic.texts++;
+            }
+        }
+    }
+
+    scan(root);
+
+    return statistic;
 }
 
 /**

@@ -197,9 +197,9 @@ function collectDOMStat(root) {
 /**
  * *** Со звездочкой ***
  * Функция должна отслеживать добавление и удаление элементов внутри элемента where
- * Как только в where добавляются или удаляются элемента,
+ * Как только в where добавляются или удаляются элементы,
  * необходимо сообщать об этом при помощи вызова функции fn со специальным аргументом
- * В качестве аргумента должен быть передан объек с двумя свойствами:
+ * В качестве аргумента должен быть передан объект с двумя свойствами:
  * - type: типа события (insert или remove)
  * - nodes: массив из удаленных или добавленных элементов (а зависимости от события)
  * Отслеживание должно работать вне зависимости от глубины создаваемых/удаляемых элементов
@@ -226,6 +226,27 @@ function collectDOMStat(root) {
  * }
  */
 function observeChildNodes(where, fn) {
+
+    let config = {
+        childList: true,
+        subtree: true,
+    };
+
+    let observe = new MutationObserver(mutations => {
+        mutations.forEach(mutation => {
+            if (mutation.type === 'childList') {
+                fn({
+                    type: mutation.addedNodes.length ? 'insert' : 'remove',
+                    nodes: [...mutation.addedNodes.length ? mutation.addedNodes : mutation.removedNodes],
+                });
+            } else {
+                observe.disconnect();
+            }
+        });
+    });
+
+    observe.observe(where, config);
+
 }
 
 export {

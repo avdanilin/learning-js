@@ -70,6 +70,12 @@ function delegate(target, fn) {
  * @param {function} fn - обработчик
  */
 function once(target, fn) {
+    let counter = 0;
+
+    target.addEventListener('click', (e) => {
+        counter++;
+        counter < 2 ? fn() : e.stopImmediatePropagation();
+    });
 }
 
 export {

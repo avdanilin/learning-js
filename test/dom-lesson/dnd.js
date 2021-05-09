@@ -9,7 +9,7 @@ describe('ДЗ 5.2 - Div D&D', () => {
     homeworkContainer.id = 'homework-container';
     homeworkContainer.innerHTML = template();
     document.body.appendChild(homeworkContainer);
-    dndPage = require('../dom-lesson/dnd');
+    dndPage = require('../../src/dom-lesson/dnd');
 
     describe('Функциональное тестирование', () => {
         describe('createDiv', () => {
